@@ -26,12 +26,21 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test
-    @DisplayName("Успешная регистрация")
+    @DisplayName("Проверка успешной регистрации")
     public void successfullRegisterTest (){
         mainPage.clickAccount();
         loginPage.clickRegisterLink();
-        registerPage.register(user.getName(), user.getEmail(), user.getPassword());
-        Assert.assertEquals("https://stellarburgers.nomoreparties.site/login", registerPage.successRegistration());
+        registerPage.inputDataForRegistration(user.getName(), user.getEmail(), user.getPassword());
+        Assert.assertEquals("https://stellarburgers.nomoreparties.site/login", registerPage.successfullRegistration());
+    }
+    @Test
+    @DisplayName("Провекрка регистрации с некорректным паролем")
+    public void unsuccessfullRegisterTestWithInvalidPassword (){
+        mainPage.clickAccount();
+        loginPage.clickRegisterLink();
+        registerPage.inputDataForRegistration(user.getName(), user.getEmail(), "666");
+        Assert.assertEquals("Некорректный пароль", registerPage.errorText());
+
     }
 
 

@@ -10,7 +10,7 @@ import static site.nomoreparties.stellarburgers.config.AppConfig.APP_URL;
 
 public class LoginPage {
 
-    WebDriver webDriver;
+    private static WebDriver webDriver;
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -22,13 +22,14 @@ public class LoginPage {
     private final By enterBtn = By.xpath("//button[text()='Войти']");
     private final By forgotPasswordLink = By.xpath(".//a[text()='Восстановить пароль']");
     private final By registerLink = By.xpath(".//a[text()='Зарегистрироваться']");
+    private final String successLogin = "https://stellarburgers.nomoreparties.site";
 
     @Step("Клик на Войти")
     public void clickEnterBtn() {
         webDriver.findElement(enterBtn).click();
     }
     @Step("Клик на Восстановить пароль")
-    public void forgotPasswordLink() {
+    public void clickForgotPasswordLink() {
         webDriver.findElement(forgotPasswordLink).click();
     }
     @Step("Клик на Зарегистрироваться")
@@ -43,4 +44,18 @@ public class LoginPage {
     public void inputPassword(String password) {
         webDriver.findElement(passwordInputField).sendKeys(password);
     }
+
+    @Step("Получение подтверждения авторизации")
+    public String successfullLogin() {
+        webDriver.get(successLogin);
+        return webDriver.getCurrentUrl();
+    }
+
+    @Step ("Ввод данных для авторизации пользователя")
+    public void inputDataForLogin(String email, String password) {
+        inputEmail(email);
+        inputPassword(password);
+        clickEnterBtn();
+    }
+
 }

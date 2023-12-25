@@ -22,7 +22,7 @@ public class WebDriverFactory {
                 WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver();
             case "yandex":
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
+                System.setProperty("webdriver.chrome.driver", "/Users/paulpoker/Desktop/ПРАКТИКУМ JAVA/Diplom/Diplom_3/Diplom_3/Diplom_3/src/main/resources/yandexdriver");
                 return new ChromeDriver();
             default:
                 throw new RuntimeException("Browser undefined");
